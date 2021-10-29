@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VSGMMemoryLeak.Pages.NonLeakingPage2">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" Text="This button does not leak">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="Opacity" Value="1" />
+                                <Setter Property="TextColor" Value="Green"/>
+                            </VisualState.Setters>
+                        </VisualState>
+
+                        <VisualState x:Name="Focused">
+                            <VisualState.Setters>
+                                <Setter Property="Opacity" Value="1" />
+                                <Setter Property="TextColor" Value="Red"/>
+                            </VisualState.Setters>
+                        </VisualState>
+
+                        <VisualState x:Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="Opacity" Value=".7" />
+                                <Setter Property="TextColor" Value="Blue"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+            </Button>
+            <Button Grid.Row="1" Text="This button also does not leak" StyleClass="NonLeakyButtonStyle"/>
+
+            <StackLayout Grid.Row="2">
+                <Button Text="Navigate to Leaking Page!" Clicked="NavToLeakPage"/>
+                <Button Text="Navigate to Non Leaking Page 1!" Clicked="NavToNonLeakPage1"/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
